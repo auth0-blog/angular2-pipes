@@ -1,0 +1,22 @@
+<h1>Dates</h1>
+<!-- Sep 1, 2015 -->
+<p>{{ date | date:'mediumDate' }}
+<!-- September 1, 2015 -->
+<p>{{ date | date:'yMMMMd' }}
+<!-- 3:50 pm -->
+<p>{{ date | date:'shortTime' }}
+
+<h1>Decimals/Percentages</h1>
+<!-- 99.00% -->
+<p>{{ grade | percent:'.2' }}</p>
+<!-- 09.12 -->
+<p>{{ rating | number:'2.1-2' }}</p>
+
+<h1>Async</h1>
+<p>{{ promise | async }}</p>
+
+<h1>Custom Pipes - Convert Temperature</h1>
+<!-- 85 F -->
+<h3>Fahrenheit: {{ temperature + ' F' }}</h3>
+<!-- 29.4 C -->
+<h3>Celsius: {{ temperature | tempConvert:'celsius':1 }}</h3>
