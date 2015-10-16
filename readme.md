@@ -1,4 +1,5 @@
 # Angular 2 Pipes
+## Based on [ng2-play.ts](https://github.com/pkozlowski-opensource/ng2-play)
 
 This is the code for Auth0's Angular 2 series tutorial on [working with pipes](#). In the tutorial, we cover: 
 
@@ -10,9 +11,12 @@ This is the code for Auth0's Angular 2 series tutorial on [working with pipes](#
 
 Clone the repo and then:
 
-    tsc --watch -m commonjs -t es5 --emitDecoratorMetadata
+```bash
+npm install
+gulp play
+```
 
-Serve the app with a web server and navigate to it.
+The app will be served at `localhost:9000`.
 
 ## Important Snippets
 
@@ -21,16 +25,14 @@ In this tutorial, we work with everything out of one file, `app.ts`.
 ```js
 // app.ts
 
-/// <reference path="typings/angular2/angular2.d.ts" />
-
-import {Component, View, bootstrap, Pipe, bind} from 'angular2/angular2';
+import {Component, View, bootstrap, Pipe, PipeTransform, bind} from 'angular2/angular2';
 
 // We use the @Pipe decorator to register the name of the pipe
 @Pipe({
   name: 'tempConvert'
 })
 // The work of the pipe is handled in the tranform method with our pipe's class
-class TempConvertPipe {
+class TempConvertPipe implements PipeTransform {
   transform(value: number, args: any[]) {
     if(value && !isNaN(value) && args[0] === 'celsius') {
       var temp = (value - 32) * 5/9;
@@ -42,8 +44,7 @@ class TempConvertPipe {
   }
 }
 @Component({
-  selector: 'pipes',
-  changeDetection: 'ON_PUSH'
+  selector: 'pipes'
 })
 @View({
   templateUrl: 'pipesTemplate.html',
@@ -59,7 +60,6 @@ class PipesAppComponent {
   promise: Promise;
 
   constructor() {
-    var result;
     this.date = new Date();
     this.rating = 9.1243;
     this.grade = 0.99;
